@@ -3,22 +3,27 @@
 #####################################################################
 
 import dns.resolver
+import pprint
 
 resolver = dns.resolver.Resolver()
 
-master = "200.3.13.10"
-zone = "lacnic.net"
-
+## resolve A record for a given hostname
 def resolve_a_ns(w_hostname):
+    '''
+    Resolve A record for a given hostname.
+    '''
     res2 = dns.resolver.query(w_hostname, 'A')
     return res2[0].address
 ## end def
 
-if __name__ == "__main__":
-
+## resolve serial numbers from different ns servers for a single zone
+def get_serials_for_zone(w_master, w_zone):
+    '''
+    '''
     ## get nsset for zone
 
-    resolver.nameservers = [master]
+    zone = w_zone
+    resolver.nameservers = [w_master]
 
     zone_ns_ans = resolver.query(zone, 'NS')
 
@@ -43,14 +48,22 @@ if __name__ == "__main__":
         serials_result[zone][server]['serial'] = serial
         print("Serial: {} ".format(serial))
 
+    return serials_result
+
+## end def #####################################################################
+
+## BEGIN MAIN ##################################################################
+if __name__ == "__main__":
+
+    serials_result = get_serials_for_zone('200.3.13.11', '179.in-addr.arpa')
 
     # ans = dns.resolver.query('lacnic.net', 'SOA')
-
     # for rdata in ans: 
     #     print(rdata.serial)
 
-    print(repr(serials_result))
+    pp = pprint.PrettyPrinter()
+    pp.pprint(serials_result)
 
-## END MAIN
+    # print(repr(serials_result))
 
-#####################################################################
+## END MAIN #####################################################################
