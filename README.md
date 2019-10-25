@@ -6,17 +6,17 @@
 
  ## Measurements
 
- ### SOA Serial Monitoring Accross the NSSet
+ ### 1. SOA Serial Monitoring Accross the NSSet
 
  Check a zone's SOA serial number accross the entire NSSet.
 
  Usage:
  - configuration file:
- 
+
 
  ## Exporters
 
- ### Grafana
+ ### 1. Grafana
 
  Requirements: requests
 
