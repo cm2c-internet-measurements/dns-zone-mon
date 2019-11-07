@@ -3,7 +3,7 @@
 import click
 import pprint
 
-import monitors.soa-serial-mon as mon
+import monitors.soa_serial_mon as mon
 
 @click.command()
 @click.option('--zone', default=None, help='Zone to check.')
